@@ -87,9 +87,6 @@ class GenomeTest(unittest.TestCase):
         genome_dicts = genome.Genome.get_genome_dicts(dna, spec)
         links = genome.Genome.genome_to_links(genome_dicts)
         self.assertEqual(len(links), 3)
-        
-
     
-
 
 unittest.main()
