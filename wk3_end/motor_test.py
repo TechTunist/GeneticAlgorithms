@@ -13,7 +13,7 @@ p.setGravity(0, 0, -10)
 p.setRealTimeSimulation(1)
 
 # generate a random creature
-cr = creature.Creature(gene_count=3)
+cr = creature.Creature(gene_count=5)
 # save it to XML
 with open('test.urdf', 'w') as f:
     f.write(cr.to_xml())
