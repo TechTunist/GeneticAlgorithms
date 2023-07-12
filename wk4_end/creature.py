@@ -40,6 +40,7 @@ class Creature:
         self.motors = None
         self.start_position = None
         self.last_position = None
+        self.positions = []
 
     def get_flat_links(self):
         if self.flat_links == None:
@@ -108,3 +109,19 @@ class Creature:
         self.motors = None
         self.start_position = None
         self.last_position = None
+
+    # this code uses iterations as a time step but this is not useful for working out an individual creature's average speed
+    def get_average_speed(self, positions):
+        start_position = positions[0]
+        end_position = positions[-1]
+        total_distance = np.linalg.norm(np.array(end_position) - np.array(start_position))
+        total_time = len(positions)  # Number of time steps
+        speed_m_per_sec = total_distance / total_time
+        speed_cm_per_sec = speed_m_per_sec * 100  # Convert from meters per second to centimeters per second
+        return speed_cm_per_sec
+
+    def get_path_straightness(self, positions):
+        straight_distance = np.linalg.norm(np.array(positions[-1]) - np.array(positions[0]))
+        actual_distance = sum(np.linalg.norm(np.array(pos1) - np.array(pos2)) 
+                              for pos1, pos2 in zip(positions[:-1], positions[1:]))
+        return straight_distance / actual_distance

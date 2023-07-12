@@ -13,57 +13,37 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
 
     # Set the parameters for the genetic algorithm
     gene_count = 3  # Set this to the number of genes you want to use
-    num_iterations = 10  # Set this to the number of iterations you want to run
+    num_iterations = 3  # Set this to the number of iterations you want to run
 
     # Initialize the population and simulation
     population = Population(population_size, gene_count)
     simulation = Simulation()
 
-#     # Run the genetic algorithm
-#     for i in range(num_iterations):
-#         # Evaluate the current population
-#         fitnesses = simulation.eval_population(population, i)
-
-#         # Print some statistics about the current generation
-#         print(f"Generation {i}:")
-#         print(f"  Max fitness: {max(fitnesses)}")
-#         print(f"  Min fitness: {min(fitnesses)}")
-#         print(f"  Avg fitness: {np.mean(fitnesses)}")
-
-#         # Save the DNA of the creatures to CSV files
-#         for j, creature in enumerate(population.creatures):
-#             csv_filename = os.path.join(output_dir, f"generation_{i}_creature_{j}.csv")
-#             Genome.to_csv(creature.dna, csv_filename)
-
-#         # Select parents and create the next generation
-#         parents = population.select_parents(fitnesses)
-#         offspring = []
-#         for parent1, parent2 in zip(parents[:-1:2], parents[1::2]):
-#             # Perform crossover and mutation
-#             child_dna = Genome.crossover(population[parent1].dna, population[parent2].dna)
-#             child_dna = Genome.mutate(child_dna, mutation_rate, mutation_range)
-#             # Create the child and add it to the new generation
-#             child = population[parent1]  # Create a child based on one of the parents
-#             child.update_dna(child_dna)  # Update the child's DNA
-#             offspring.append(child)  # Add the child to the new generation
-#         # Replace the old generation with the new one
-#         population.creatures = offspring
-
-
-# # run the code
-# run_experiment(population_size=100, mutation_rate=0.1, mutation_range=0.5, output_dir="experiment1")
-
-
     # Run the genetic algorithm
     for i in range(num_iterations):
         # Evaluate the current population
-        fitnesses = simulation.eval_population(population, i)
+        fitnesses, avg_speeds, path_straightnesses, creatures = simulation.eval_population(population, i)
+
+        # Calculate path straightness and average speed
+        path_straightnesses = [creature.get_path_straightness(creature.positions) for creature in creatures]
+        avg_speeds = [creature.get_average_speed(creature.positions) for creature in creatures]
 
         # Print some statistics about the current generation
         print(f"Generation {i}:")
         print(f"  Max fitness: {max(fitnesses)}")
         print(f"  Min fitness: {min(fitnesses)}")
         print(f"  Avg fitness: {np.mean(fitnesses)}")
+
+        fitness_df = pd.DataFrame({
+            'max_distance': [max(fitnesses)],
+            'min_distance': [min(fitnesses)],
+            'avg_distance': [np.mean(fitnesses)],
+            'avg_speed': [np.mean(avg_speeds)],  # Save average speeds
+            'path_straightness': [np.mean(path_straightnesses)]  # Save path straightness values
+        })
+        
+        fitness_csv_filename = os.path.join(output_dir, f"generation_{i}_fitness.csv")
+        fitness_df.to_csv(fitness_csv_filename, index=False)
 
         # Save the DNA of the creatures to CSV files
         for j, creature in enumerate(population.creatures):
@@ -94,7 +74,29 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
         # Replace the old generation with the new one
         population.creatures = offspring
 
+# function to automate simulations based on param combinations dictionary
+def run_experiments(param_combinations):
+    for i, params in enumerate(param_combinations):
+        print(f"Running experiment {i+1} of {len(param_combinations)} with parameters: {params}")
+        # Create a directory name based on the parameter values
+        dir_name = f"experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
+        # Run the experiment with the given parameters
+        run_experiment(
+            population_size=params['population_size'], 
+            mutation_rate=params['mutation_rate'], 
+            mutation_range=params['mutation_range'], 
+            output_dir=dir_name
+        )
 
-# run the code
-run_experiment(population_size=100, mutation_rate=0.1, mutation_range=0.5, output_dir="experiment1")
+# Define a list of parameter combinations to test
+param_combinations = [
+    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.5},
+    {"population_size": 200, "mutation_rate": 0.1, "mutation_range": 0.5},
+    {"population_size": 100, "mutation_rate": 0.2, "mutation_range": 0.5},
+    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 1.0},
+    # Add more parameter combinations as needed...
+]
+
+# Run the experiments
+run_experiments(param_combinations)
 

@@ -7,6 +7,8 @@ class Simulation:
         self.sim_id = sim_id
 
     def run_creature(self, cr, iterations=2400):
+        positions = []  # List to store the creature's positions
+        
         pid = self.physicsClientId
         p.resetSimulation(physicsClientId=pid)
         p.setPhysicsEngineParameter(enableFileCaching=0, physicsClientId=pid)
@@ -31,9 +33,13 @@ class Simulation:
                 self.update_motors(cid=cid, cr=cr)
 
             pos, orn = p.getBasePositionAndOrientation(cid, physicsClientId=pid)
+            cr.positions.append(pos)
+            positions.append(pos)
             cr.update_position(pos)
             #print(pos[2])
             #print(cr.get_distance_travelled())
+
+        return positions
         
     
     def update_motors(self, cid, cr):
@@ -57,12 +63,27 @@ class Simulation:
     #     for cr in pop.creatures:
     #         self.run_creature(cr, 2400) 
 
+    # def eval_population(self, pop, iterations):
+    #     fitnesses = []
+    #     for cr in pop.creatures:
+    #         self.run_creature(cr, 2400)
+    #         fitnesses.append(cr.get_distance_travelled())  # Add the fitness of the creature to the list
+    #     return fitnesses  # Return the list of fitness scores
+
     def eval_population(self, pop, iterations):
         fitnesses = []
+        avg_speeds = []
+        path_straightnesses = []
         for cr in pop.creatures:
-            self.run_creature(cr, 2400)
-            fitnesses.append(cr.get_distance_travelled())  # Add the fitness of the creature to the list
-        return fitnesses  # Return the list of fitness scores
+            positions = self.run_creature(cr, 2400)  # Capture the returned list of positions
+            # Calculate average speed and path straightness
+            avg_speed = cr.get_average_speed(positions)
+            path_straightness = cr.get_path_straightness(positions)
+            # Append the values to their respective lists
+            fitnesses.append(cr.get_distance_travelled())
+            avg_speeds.append(avg_speed)
+            path_straightnesses.append(path_straightness)
+        return fitnesses, avg_speeds, path_straightnesses, pop.creatures  # Return the lists and creatures
 
 
 
