@@ -242,30 +242,36 @@ class URDFLink:
         geom_tag = adom.createElement("geometry")
         
         # change to cylinder, box or sphere with the suitable attributes below
-        cyl_tag = adom.createElement("box")
+        cyl_tag = adom.createElement("sphere") # change dependent on which geom we are using
 
         # attributes for cylinder
         # cyl_tag.setAttribute("length", str(self.link_length))
         # cyl_tag.setAttribute("radius", str(self.link_radius))
 
+        # attributes for sphere
+        cyl_tag.setAttribute("radius", str(self.link_radius))
+
         # attributes for box
-        box_size = "{} {} {}".format(self.link_length, self.link_length, self.link_length)
-        cyl_tag.setAttribute("size", box_size)
+        # box_size = "{} {} {}".format(self.link_length, self.link_length, self.link_length)
+        # cyl_tag.setAttribute("size", box_size)
         
         geom_tag.appendChild(cyl_tag)
         vis_tag.appendChild(geom_tag)
         
         coll_tag = adom.createElement("collision")
         c_geom_tag = adom.createElement("geometry")
-        c_cyl_tag = adom.createElement("box")
+        c_cyl_tag = adom.createElement("sphere") # change dependent on which geom we are using
 
         # attributes for cylinder
         # c_cyl_tag.setAttribute("length", str(self.link_length))
         # c_cyl_tag.setAttribute("radius", str(self.link_radius))
+
+        # attributes for sphere
+        c_cyl_tag.setAttribute("radius", str(self.link_radius))
         
         # attributes for box
-        box_size = "{} {} {}".format(self.link_length, self.link_length, self.link_length)
-        c_cyl_tag.setAttribute("size", box_size)
+        # box_size = "{} {} {}".format(self.link_length, self.link_length, self.link_length)
+        # c_cyl_tag.setAttribute("size", box_size)
 
         c_geom_tag.appendChild(c_cyl_tag)
         coll_tag.appendChild(c_geom_tag)

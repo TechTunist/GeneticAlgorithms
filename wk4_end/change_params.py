@@ -13,7 +13,7 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
 
     # Set the parameters for the genetic algorithm
     gene_count = 3  # Set this to the number of genes you want to use
-    num_iterations = 50  # Set this to the number of iterations you want to run
+    num_iterations = 10  # Set this to the number of iterations you want to run
 
     # Initialize the population and simulation
     population = Population(population_size, gene_count)
@@ -65,6 +65,12 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
             # Perform crossover and mutation
             child_dna = Genome.crossover(parent1.dna, parent2.dna)
             child_dna = Genome.point_mutate(child_dna, mutation_rate, mutation_range)
+            
+
+            ##### testing this #####
+            # child_dna = Genome.grow_mutate(child_dna, mutation_rate)
+            ########################
+
 
             # Create the child and add it to the new generation
             child = Creature(gene_count=gene_count)
@@ -79,7 +85,7 @@ def run_experiments(param_combinations):
     for i, params in enumerate(param_combinations):
         print(f"Running experiment {i+1} of {len(param_combinations)} with parameters: {params}")
         # Create a directory name based on the parameter values
-        dir_name = f"box_experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
+        dir_name = f"sphere_experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
         # Run the experiment with the given parameters
         run_experiment(
             population_size=params['population_size'], 
