@@ -13,7 +13,7 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
 
     # Set the parameters for the genetic algorithm
     gene_count = 3  # Set this to the number of genes you want to use
-    num_iterations = 3  # Set this to the number of iterations you want to run
+    num_iterations = 50  # Set this to the number of iterations you want to run
 
     # Initialize the population and simulation
     population = Population(population_size, gene_count)
@@ -79,7 +79,7 @@ def run_experiments(param_combinations):
     for i, params in enumerate(param_combinations):
         print(f"Running experiment {i+1} of {len(param_combinations)} with parameters: {params}")
         # Create a directory name based on the parameter values
-        dir_name = f"experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
+        dir_name = f"box_experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
         # Run the experiment with the given parameters
         run_experiment(
             population_size=params['population_size'], 
@@ -93,7 +93,8 @@ param_combinations = [
     {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.5},
     {"population_size": 200, "mutation_rate": 0.1, "mutation_range": 0.5},
     {"population_size": 100, "mutation_rate": 0.2, "mutation_range": 0.5},
-    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 1.0},
+    {"population_size": 200, "mutation_rate": 0.5, "mutation_range": 0.5},
+    {"population_size": 500, "mutation_rate": 0.5, "mutation_range": 0.5},
     # Add more parameter combinations as needed...
 ]
 

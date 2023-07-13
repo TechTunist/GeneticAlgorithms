@@ -32,12 +32,33 @@ class Simulation:
             if step % 24 == 0:
                 self.update_motors(cid=cid, cr=cr)
 
-            pos, orn = p.getBasePositionAndOrientation(cid, physicsClientId=pid)
+            # pos, orn = p.getBasePositionAndOrientation(cid, physicsClientId=pid)
+            # cr.positions.append(pos)
+            # positions.append(pos)
+            # cr.update_position(pos)
+            #print(pos[2])
+            #print(cr.get_distance_travelled())
+
+            # try:
+            #     pos, orn = p.getBasePositionAndOrientation(cid, physicsClientId=pid)
+            #     cr.positions.append(pos)
+            #     positions.append(pos)
+            #     cr.update_position(pos)
+            # except p.error as e:
+            #     print(f"Error getting data for creature with ID {cid} in physics engine {pid}. Error message: {e}")
+
+            try:
+                pos, orn = p.getBasePositionAndOrientation(cid, physicsClientId=pid)
+            except p.error as e:
+                print(f"Error getting position and orientation for creature with ID {cid} in physics engine {pid}. Error message: {e}")
+                if cr.last_position is not None:
+                    pos = cr.last_position  # Use the last known position
+                else:
+                    pos = [1, 1, 1]  # Use a default position
+
             cr.positions.append(pos)
             positions.append(pos)
             cr.update_position(pos)
-            #print(pos[2])
-            #print(cr.get_distance_travelled())
 
         return positions
         
