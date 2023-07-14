@@ -18,8 +18,8 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
     os.makedirs(fittest_creature_dir, exist_ok=True)
 
     # Set the parameters for the genetic algorithm
-    gene_count = 6  # Set this to the number of genes you want to use
-    num_iterations = 10  # Set this to the number of iterations you want to run
+    gene_count = 3  # Set this to the number of genes you want to use
+    num_iterations = 20  # Set this to the number of iterations you want to run
 
     # Initialize the population and simulation
     population = Population(population_size, gene_count)
@@ -106,44 +106,44 @@ def run_experiments(param_combinations):
 
 # Define a list of parameter combinations to test
 param_combinations = [
-    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.1},
-    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.4},
-    {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.8},
+    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.1},
+    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.4},
+    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.8},
 
-    {"population_size": 100, "mutation_rate": 0.4, "mutation_range": 0.4},
-    {"population_size": 100, "mutation_rate": 0.8, "mutation_range": 0.8},
+    {"population_size": 50, "mutation_rate": 0.4, "mutation_range": 0.4},
+    {"population_size": 50, "mutation_rate": 0.8, "mutation_range": 0.8},
     
-    {"population_size": 100, "mutation_rate": 0.4, "mutation_range": 0.1},
-    {"population_size": 100, "mutation_rate": 0.8, "mutation_range": 0.1},
+    {"population_size": 50, "mutation_rate": 0.4, "mutation_range": 0.1},
+    {"population_size": 50, "mutation_rate": 0.8, "mutation_range": 0.1},
 
 
-    {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.1},
-    {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.4},
-    {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.8},
+    # {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.1},
+    # {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.4},
+    # {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.8},
 
-    {"population_size": 300, "mutation_rate": 0.4, "mutation_range": 0.4},
-    {"population_size": 300, "mutation_rate": 0.8, "mutation_range": 0.8},
+    # {"population_size": 300, "mutation_rate": 0.4, "mutation_range": 0.4},
+    # {"population_size": 300, "mutation_rate": 0.8, "mutation_range": 0.8},
     
-    {"population_size": 300, "mutation_rate": 0.4, "mutation_range": 0.1},
-    {"population_size": 300, "mutation_rate": 0.8, "mutation_range": 0.1},
+    # {"population_size": 300, "mutation_rate": 0.4, "mutation_range": 0.1},
+    # {"population_size": 300, "mutation_rate": 0.8, "mutation_range": 0.1},
 
-    {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.1},
-    {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.4},
-    {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.8},
+    # {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.1},
+    # {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.4},
+    # {"population_size": 600, "mutation_rate": 0.1, "mutation_range": 0.8},
 
-    {"population_size": 600, "mutation_rate": 0.4, "mutation_range": 0.4},
-    {"population_size": 600, "mutation_rate": 0.8, "mutation_range": 0.8},
+    # {"population_size": 600, "mutation_rate": 0.4, "mutation_range": 0.4},
+    # {"population_size": 600, "mutation_rate": 0.8, "mutation_range": 0.8},
     
-    {"population_size": 600, "mutation_rate": 0.4, "mutation_range": 0.1},
-    {"population_size": 600, "mutation_rate": 0.8, "mutation_range": 0.1},
+    # {"population_size": 600, "mutation_rate": 0.4, "mutation_range": 0.1},
+    # {"population_size": 600, "mutation_rate": 0.8, "mutation_range": 0.1},
     
 
-    {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.1},
-    {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.5},
-    {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.9},
+    # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.1},
+    # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.5},
+    # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.9},
     
-    {"population_size": 800, "mutation_rate": 0.5, "mutation_range": 0.6},
-    {"population_size": 800, "mutation_rate": 0.9, "mutation_range": 0.1},
+    # {"population_size": 800, "mutation_rate": 0.5, "mutation_range": 0.6},
+    # {"population_size": 800, "mutation_rate": 0.9, "mutation_range": 0.1},
     
     # Add more parameter combinations as needed...
 ]
