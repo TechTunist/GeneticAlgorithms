@@ -18,8 +18,8 @@ def run_experiment(population_size, mutation_rate, mutation_range, output_dir):
     os.makedirs(fittest_creature_dir, exist_ok=True)
 
     # Set the parameters for the genetic algorithm
-    gene_count = 3  # Set this to the number of genes you want to use
-    num_iterations = 20  # Set this to the number of iterations you want to run
+    gene_count = 7  # Set this to the number of genes you want to use
+    num_iterations = 50  # Set this to the number of iterations you want to run
 
     # Initialize the population and simulation
     population = Population(population_size, gene_count)
@@ -95,7 +95,7 @@ def run_experiments(param_combinations):
     for i, params in enumerate(param_combinations):
         print(f"Running experiment {i+1} of {len(param_combinations)} with parameters: {params}")
         # Create a directory name based on the parameter values
-        dir_name = f"sphere_experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
+        dir_name = f"7_gene_geom_selected_experiment_pop{params['population_size']}_mutrate{params['mutation_rate']}_mutrange{params['mutation_range']}"
         # Run the experiment with the given parameters
         run_experiment(
             population_size=params['population_size'], 
@@ -106,15 +106,15 @@ def run_experiments(param_combinations):
 
 # Define a list of parameter combinations to test
 param_combinations = [
-    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.1},
-    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.4},
-    {"population_size": 50, "mutation_rate": 0.1, "mutation_range": 0.8},
+    # {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.1},
+    # {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.4},
+    # {"population_size": 100, "mutation_rate": 0.1, "mutation_range": 0.8},
 
-    {"population_size": 50, "mutation_rate": 0.4, "mutation_range": 0.4},
-    {"population_size": 50, "mutation_rate": 0.8, "mutation_range": 0.8},
+    # {"population_size": 100, "mutation_rate": 0.4, "mutation_range": 0.4},
+    # {"population_size": 100, "mutation_rate": 0.8, "mutation_range": 0.8},
     
-    {"population_size": 50, "mutation_rate": 0.4, "mutation_range": 0.1},
-    {"population_size": 50, "mutation_rate": 0.8, "mutation_range": 0.1},
+    # {"population_size": 100, "mutation_rate": 0.4, "mutation_range": 0.1},
+    # {"population_size": 100, "mutation_rate": 0.8, "mutation_range": 0.1},
 
 
     # {"population_size": 300, "mutation_rate": 0.1, "mutation_range": 0.1},
@@ -140,7 +140,7 @@ param_combinations = [
 
     # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.1},
     # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.5},
-    # {"population_size": 800, "mutation_rate": 0.1, "mutation_range": 0.9},
+    {"population_size": 3000, "mutation_rate": 0.1, "mutation_range": 0.9},
     
     # {"population_size": 800, "mutation_rate": 0.5, "mutation_range": 0.6},
     # {"population_size": 800, "mutation_rate": 0.9, "mutation_range": 0.1},
